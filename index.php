@@ -2,6 +2,13 @@
 
 if (isset($_POST['submit']) && !empty($_FILES['file']))
 {
+    $info = pathinfo($_FILES['file']['name']);
+
+    if($info['extension'] != 'csv'){
+        echo 'Please upload csv file only.';
+        return;
+    }
+
     $handle = fopen($_FILES['file']['tmp_name'], "r");
     $headers = fgetcsv($handle, 1000, ",");
 
